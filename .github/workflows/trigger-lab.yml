@@ -5,8 +5,8 @@ run-name: "${{ github.actor }} triggered the lab"
 on:
   push:
   workflow_dispatch:
-  schedule:
-    - cron: '*/2 * * * *'
+#  schedule:
+ #   - cron: '*/2 * * * *'
 
 jobs:
   handle-event:
