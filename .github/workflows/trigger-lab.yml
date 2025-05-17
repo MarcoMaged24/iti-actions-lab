@@ -1,0 +1,28 @@
+name: Trigger Lab Example
+
+run-name: "${{ github.actor }} triggered the lab"
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/2 * * * *'
+
+jobs:
+  handle-event:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Initial message
+        run: echo "This is a test for multiple triggers"
+
+      - name: Custom trigger message
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            echo "Code was pushed!"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Manual execution"
+          elif [ "${{ github.event_name }}" = "schedule" ]; then
+            echo "Running on schedule"
+          else
+            echo "Unknown trigger source"
+          fi
